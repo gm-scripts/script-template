@@ -1,24 +1,53 @@
-let config = {
-  mode: "production",
-  module: {},
+const webpack = require('webpack');
+const path = require('path');
+
+const buildPath = path.resolve(__dirname, 'testdist');
+
+const server = {
+  entry: './src/server/entry.ts',
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: ['ts-loader', 'eslint-loader'],
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  optimization: {
+    minimize: true,
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
+  output: {
+    filename: 'main.js',
+    path: path.resolve(buildPath, 'server')
+  },
+  target: 'node',
 };
 
-let client = Object.assign({}, config, {
-  name: "client",
-  entry: "./src/client/entry.js",
-  output: {
-    path: __dirname + "/dist/client",
-    filename: "main.js",
+const client = {
+  entry: './src/client/entry.ts',
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: ['ts-loader', 'eslint-loader'],
+        exclude: /node_modules/,
+      },
+    ],
   },
-});
-let server = Object.assign({}, config, {
-  name: "server",
-  entry: "./src/server/entry.js",
-  output: {
-    path: __dirname + "/dist/server",
-    filename: "main.js",
+  optimization: {
+    minimize: true,
   },
-  target: "node",
-});
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
+  output: {
+    filename: 'main.js',
+    path: path.resolve(buildPath, 'client'),
+  },
+};
 
-module.exports = client;
+module.exports = [server, client];
