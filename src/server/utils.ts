@@ -18,27 +18,12 @@ const error = (msg: string, type: string): void => {
 if (!fs.existsSync("./gmconfig/")) {
   error(`cant find folder "gmconfig" in ${process.cwd()}`, "none");
 }
-if (!fs.existsSync("./gmlocales/")) {
-  error(`cant find folder "gmlocales" in ${process.cwd()}`, "none");
-}
-if (!fs.existsSync(`./gmconfig/${script}.json`)) {
-  error(`cant find file "${script}.json" in ${process.cwd()}\\gmconfig`, "none");
-}
-if (!fs.existsSync(`./gmlocales/${script}/`)) {
-  error(`cant find folder "${script}" in ${process.cwd()}\\gmlocales`, "none");
-}
 
-if (!fs.existsSync(`./gmconfig/${script}.json`) && !fs.existsSync(`./gmlocales/${script}/`)) {
+if (!fs.existsSync(`./gmconfig/${script}.json`)) {
   error(`please read the installation instructions of our scripts`, "none");
 }
 
 const config = JSON.parse(fs.readFileSync(`./gmconfig/${script}.json`).toString());
-
-if (!fs.existsSync(`./gmlocales/${script}/${config.lang}.json`)) {
-  error(`cant find file "${config.lang}.json" in ${process.cwd()}\\gmlocales\\${script}`, "none");
-}
-
-const locales = JSON.parse(fs.readFileSync(`./gmlocales/${script}/${config.lang}.json`).toString());
 
 onNet(`gm_${script}:getConfig`, data => {
   emitNet(`gm_${script}:callbackUtils`, source, config, data.CallbackID);
@@ -48,8 +33,6 @@ onNet(`gm_${script}:getConfig`, data => {
   }
 });
 
-onNet(`gm_${script}:getLocales`, data => {
-  emitNet(`gm_${script}:callbackUtils`, source, locales, data.CallbackID);
-});
+const conf = config;
 
-export { vRPServer, vRPTunnelServer };
+export { vRPServer, vRPTunnelServer, conf };

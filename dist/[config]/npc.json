@@ -1,0 +1,31 @@
+{
+    "deleteAllVehicles": true,
+    "deleteAllPeds": false,
+    "pedSpawning": false,
+    "pedDensity": 1.0,
+    "carSpawning": false,
+    "carDensity": 1.0,
+    "parkedCarSpawning": false,
+    "parkedCarDensity": 1.0,
+    "garbageTrucks": false,
+    "randomBoats": false,
+    "randomTrains": false,
+    "policeIgnorePlayer": true,
+    "dispatchTypes": {
+        "policeAutomobile": false,
+        "policeHelicopter": false,
+        "fireDepartment": false,
+        "swatAutomobile": false,
+        "ambulanceDepartment": false,
+        "policeRiders": false,
+        "policeVehicleRequest": false,
+        "policeRoadBlock": false,
+        "policeAutomobileWaitPulledOver": false,
+        "policeAutomobileWaitCruising": false,
+        "gangs": false,
+        "swatHelicopter": false,
+        "policeBoat": false,
+        "armyVehicle": false,
+        "bikerBackup": false
+    }
+}

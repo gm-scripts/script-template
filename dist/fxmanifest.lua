@@ -1,24 +1,13 @@
 fx_version 'cerulean'
 game 'gta5'
 
-author 'Eichenholz & Obsidianical'
-description 'ScriptName / GM-Scripts'
-
-ui_page 'html/index.html'
-
-files {
-    'html/index.html',
-    'html/img/*',
-    'html/css/*',
-    'html/js/*'
-}
+author 'Eichenholz'
+description 'NPC Control / GM-Scripts'
 
 client_scripts {
     'client/main.js'
 }
 
 server_scripts {
-    '@vrp/lib/utils.lua', -- uncomment if you are using vrp 
-    'server/bridge.lua', -- uncomment if you are using vrp 
     'server/main.js'
 }

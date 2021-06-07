@@ -11,11 +11,34 @@ interface Validator {
 }
 
 const confValidator: Validator[] = [
-  { name: "framework", type: "string" },
-  { name: "lang", type: "string" },
+  {name: "deleteAllVehicles", type: "boolean"},
+  {name: "deleteAllPeds", type: "boolean"},
+  {name: "pedSpawning", type: "boolean"},
+  {name: "pedDensity", type: "number"},
+  {name: "carSpawning", type: "boolean"},
+  {name: "carDensity", type: "number"},
+  {name: "parkedCarSpawning", type: "boolean"},
+  {name: "parkedCarDensity", type: "number"},
+  {name: "garbageTrucks", type: "boolean"},
+  {name: "randomBoats", type: "boolean"},
+  {name: "randomTrains", type: "boolean"},
+  {name: "policeIgnorePlayer", type: "boolean"},
+  {name: "dispatchTypes", name2: "policeAutomobile", type: "boolean"},
+  {name: "dispatchTypes", name2: "policeHelicopter", type: "boolean"},
+  {name: "dispatchTypes", name2: "fireDepartment", type: "boolean"},
+  {name: "dispatchTypes", name2: "swatAutomobile", type: "boolean"},
+  {name: "dispatchTypes", name2: "ambulanceDepartment", type: "boolean"},
+  {name: "dispatchTypes", name2: "policeRiders", type: "boolean"},
+  {name: "dispatchTypes", name2: "policeVehicleRequest", type: "boolean"},
+  {name: "dispatchTypes", name2: "policeRoadBlock", type: "boolean"},
+  {name: "dispatchTypes", name2: "policeAutomobileWaitPulledOver", type: "boolean"},
+  {name: "dispatchTypes", name2: "policeAutomobileWaitCruising", type: "boolean"},
+  {name: "dispatchTypes", name2: "gangs", type: "boolean"},
+  {name: "dispatchTypes", name2: "swatHelicopter", type: "boolean"},
+  {name: "dispatchTypes", name2: "policeBoat", type: "boolean"},
+  {name: "dispatchTypes", name2: "armyVehicle", type: "boolean"},
+  {name: "dispatchTypes", name2: "bikerBackup", type: "boolean"},
 ];
-
-const langValidator: string[] = ["sample"];
 
 const checkConf = (): void => {
   for (let i = 0; i < confValidator.length; i++) {
@@ -102,29 +125,7 @@ const checkConf = (): void => {
       }
     }
   }
-  if (conf["framework"] != "esx" && conf["framework"] != "vrp" && conf["framework"] != "none") {
-    error(
-      `framework "${conf["framework"]}" does not exist, please use "esx", "vrp" or "none"`,
-      "config",
-    );
-  }
 };
 
-const checkLang = (): void => {
-  for (let i = 0; i < langValidator.length; i++) {
-    if (typeof lang[langValidator[i]] === "undefined") {
-      error(`locale "${langValidator[i]}" does not exist in ${conf["lang"]}.json`, "lang");
-    } else {
-      if (typeof lang[langValidator[i]] !== "string") {
-        error(
-          `locale "${langValidator[i]}" should be a string, but was a ${typeof lang[
-            langValidator[i]
-          ]}`,
-          "lang",
-        );
-      }
-    }
-  }
-};
 
-export { checkConf, checkLang };
+export { checkConf };

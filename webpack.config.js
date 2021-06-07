@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const buildPath = path.resolve(__dirname, 'testdist');
+const buildPath = path.resolve(__dirname, 'dist');
 
 const server = {
   entry: './src/server/entry.ts',

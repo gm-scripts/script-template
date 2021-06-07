@@ -2,7 +2,7 @@ import ts from "typescript";
 import { VrpProxy, VrpTunnel } from "@vrpjs/client";
 import { script } from "../config";
 import { configLoaded } from "./main";
-import { checkConf, checkLang } from "./check";
+import { checkConf } from "./check";
 const RegisterNetEvent = (data: string) => {
   ts.transpile(`RegisterNetEvent(${data})`);
 };
@@ -33,18 +33,8 @@ const serverCallback = (name: string, data: unknown, cb: unknown): void => {
   emitNet(name, data);
 };
 
-serverCallback(`gm_${script}:getLocales`, {}, (locales: unknown) => {
-  loadLocales(locales);
-});
-
 serverCallback(`gm_${script}:getConfig`, {}, (config: unknown) => {
   loadConfig(config);
-  if (config["framework"] === "esx") {
-    emit("esx:getSharedObject", obj => (ESX = obj));
-  } else if (config["framework"] === "vrp") {
-    vRP = VrpProxy.getInterface("vRP");
-    vRPTunnel = VrpTunnel.getInterface("vRP");
-  }
 });
 
 const loadLocales = (locales: unknown) => {
@@ -55,7 +45,6 @@ const loadConfig = (config: unknown) => {
   conf = config;
   configLoaded();
   checkConf();
-  checkLang();
 };
 
 const helpText = (text: string): void => {
